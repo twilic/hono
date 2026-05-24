@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- PR Message Check: skip template validation for Dependabot pull requests.
+
 ## [0.1.0] - 2026-05-20
 
 Initial public release of `@twilic/hono`.
