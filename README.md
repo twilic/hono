@@ -30,6 +30,15 @@ app.post("/users", twilicParser(), async (c) => {
 - `twilicParser(options?)`
 - `createTwilicHono(codec?)`
 
+## Runnable example
+
+```bash
+pnpm example:http-roundtrip:hono     # Hono server (in twilic/examples)
+pnpm example:http-roundtrip:client
+```
+
+See [`http-roundtrip/`](https://github.com/twilic/examples/tree/main/http-roundtrip).
+
 ## Changelog
 
 See [docs/CHANGELOG.md](docs/CHANGELOG.md).
