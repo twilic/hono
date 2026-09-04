@@ -8,14 +8,14 @@
     "middleware",
     "twilic"
   ],
+  "homepage": "https://github.com/twilic/hono#readme",
+  "bugs": {
+    "url": "https://github.com/twilic/hono/issues"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/twilic/hono.git"
-  },
-  "homepage": "https://github.com/twilic/hono#readme",
-  "bugs": {
-    "url": "https://github.com/twilic/hono/issues"
   },
   "files": [
     "dist",
@@ -54,9 +54,10 @@
     "@types/node": "^24.1.0",
     "hono": "^4.0.0",
     "husky": "^9.1.7",
-    "oxfmt": "^0.50.0",
-    "oxlint": "^1.65.0",
-    "typescript": "^5.8.2"
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+    "typescript": "^5.8.2",
+    "ultracite": "7.10.7"
   },
   "peerDependencies": {
     "@twilic/core": "^3.0.0",

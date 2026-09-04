@@ -17,7 +17,7 @@ export interface TwilicHono<T = TwilicValue> {
   parse: (c: Context) => Promise<T>;
   response: (c: Context, value: TwilicValue, init?: ResponseInit) => Response;
   parser: (
-    options?: TwilicParserOptions,
+    options?: TwilicParserOptions
   ) => ReturnType<typeof createMiddleware<{ Variables: { twilicBody: T } }>>;
 }
 
@@ -43,7 +43,7 @@ function responseWithCodec(
   codec: TwilicCodec,
   _c: Context,
   value: TwilicValue,
-  init?: ResponseInit,
+  init?: ResponseInit
 ): Response {
   const body = new Uint8Array(codec.encode(value));
   const headers = new Headers(normalizeHeaders(init?.headers));
@@ -77,7 +77,7 @@ const defaultCodec: TwilicCodec = {
 };
 
 export function createTwilicHono<T = TwilicValue>(
-  codec: TwilicCodec = defaultCodec,
+  codec: TwilicCodec = defaultCodec
 ): TwilicHono<T> {
   return {
     parse: (c) => parseWithCodec<T>(codec, c),
@@ -93,7 +93,7 @@ export function parseTwilic<T = TwilicValue>(c: Context): Promise<T> {
 export function twilicResponse(
   c: Context,
   value: TwilicValue,
-  init?: ResponseInit,
+  init?: ResponseInit
 ): Response {
   return responseWithCodec(defaultCodec, c, value, init);
 }

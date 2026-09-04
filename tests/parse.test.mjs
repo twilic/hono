@@ -1,7 +1,9 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
-import { Hono } from "hono";
+import { test } from "node:test";
+
 import { decode, encode } from "@twilic/core";
+import { Hono } from "hono";
+
 import {
   createTwilicHono,
   parseTwilic,
@@ -73,7 +75,7 @@ test("parseTwilic decodes @twilic/core wire bytes", async () => {
   assert.equal(response.status, 200);
   assert.deepEqual(
     decode(new Uint8Array(await response.arrayBuffer())),
-    payload,
+    payload
   );
 });
 
@@ -90,7 +92,7 @@ test("parseTwilic round-trips through twilicResponse", async () => {
 
   assert.deepEqual(
     decode(new Uint8Array(await response.arrayBuffer())),
-    payload,
+    payload
   );
 });
 
@@ -98,7 +100,7 @@ test("end-to-end: parser middleware then response round-trip", async () => {
   const twilic = createTwilicHono(createJsonCodec());
   const app = new Hono();
   app.post("/echo", twilic.parser(), (c) =>
-    twilic.response(c, { echo: c.var.twilicBody }),
+    twilic.response(c, { echo: c.var.twilicBody })
   );
 
   const input = { message: "hello", count: 3 };
@@ -111,7 +113,7 @@ test("end-to-end: parser middleware then response round-trip", async () => {
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("content-type"), TWILIC_CONTENT_TYPE);
   const decoded = JSON.parse(
-    new TextDecoder().decode(await response.arrayBuffer()),
+    new TextDecoder().decode(await response.arrayBuffer())
   );
   assert.deepEqual(decoded, { echo: input });
 });

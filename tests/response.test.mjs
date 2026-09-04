@@ -1,7 +1,9 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
-import { Hono } from "hono";
+import { test } from "node:test";
+
 import { decode } from "@twilic/core";
+import { Hono } from "hono";
+
 import { createTwilicHono, twilicResponse } from "../dist/index.js";
 import {
   TWILIC_CONTENT_TYPE,
@@ -15,7 +17,7 @@ test("twilicResponse sets status, content-type, and custom headers", async () =>
   const twilic = createTwilicHono(createJsonCodec());
   const app = new Hono();
   app.get("/users", (c) =>
-    twilic.response(c, { ok: true }, { status: 201, headers: { "x-id": "1" } }),
+    twilic.response(c, { ok: true }, { status: 201, headers: { "x-id": "1" } })
   );
 
   const response = await app.request("http://localhost/users");
@@ -52,8 +54,8 @@ test("twilicResponse overwrites caller content-type with Twilic", async () => {
     twilicResponse(
       c,
       { ok: true },
-      { headers: { "content-type": "application/json" } },
-    ),
+      { headers: { "content-type": "application/json" } }
+    )
   );
 
   const response = await app.request("http://localhost/users");
@@ -101,7 +103,7 @@ test("twilicResponse encodes null", async () => {
 test("twilicResponse preserves statusText from init", async () => {
   const app = new Hono();
   app.get("/created", (c) =>
-    twilicResponse(c, { ok: true }, { status: 201, statusText: "Created" }),
+    twilicResponse(c, { ok: true }, { status: 201, statusText: "Created" })
   );
 
   const response = await app.request("http://localhost/created");

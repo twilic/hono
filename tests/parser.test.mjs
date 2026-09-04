@@ -1,7 +1,9 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
-import { Hono } from "hono";
+import { test } from "node:test";
+
 import { decode, encode } from "@twilic/core";
+import { Hono } from "hono";
+
 import {
   createTwilicHono,
   twilicParser,
@@ -120,7 +122,7 @@ test("requireContentType false skips validation", async () => {
   const twilic = createTestTwilic();
   const app = new Hono();
   app.post("/users", twilic.parser({ requireContentType: false }), (c) =>
-    c.json(c.var.twilicBody),
+    c.json(c.var.twilicBody)
   );
 
   const { status, json } = await requestApp(app, "http://localhost/users", {
@@ -137,7 +139,7 @@ test("requireContentType false still decodes with missing content-type", async (
   const twilic = createTestTwilic();
   const app = new Hono();
   app.post("/users", twilic.parser({ requireContentType: false }), (c) =>
-    c.json(c.var.twilicBody),
+    c.json(c.var.twilicBody)
   );
 
   const { status, json } = await requestApp(app, "http://localhost/users", {
@@ -217,7 +219,7 @@ test("default requireContentType is true", async () => {
 test("twilicParser() decodes @twilic/core wire bytes", async () => {
   const app = new Hono();
   app.post("/users", twilicParser(), (c) =>
-    twilicResponse(c, { received: c.var.twilicBody }),
+    twilicResponse(c, { received: c.var.twilicBody })
   );
 
   const payload = { id: 1n, label: "core" };

@@ -1,7 +1,9 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
-import { Hono } from "hono";
+import { test } from "node:test";
+
 import { decode, encode } from "@twilic/core";
+import { Hono } from "hono";
+
 import {
   TWILIC_CONTENT_TYPE,
   parseTwilic,
@@ -19,7 +21,7 @@ test("twilicParser + twilicResponse round-trip with @twilic/core", async () => {
 
   const app = new Hono();
   app.post("/users", twilicParser(), (c) =>
-    twilicResponse(c, { received: c.var.twilicBody }),
+    twilicResponse(c, { received: c.var.twilicBody })
   );
 
   const response = await app.request("http://localhost/users", {
@@ -54,6 +56,6 @@ test("parseTwilic decodes @twilic/core wire bytes", async () => {
 
   assert.deepEqual(
     decode(new Uint8Array(await response.arrayBuffer())),
-    payload,
+    payload
   );
 });
