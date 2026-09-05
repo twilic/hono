@@ -25,10 +25,23 @@ app.post("/users", twilicParser(), async (c) => {
 ## API
 
 - `TWILIC_CONTENT_TYPE`
-- `parseTwilic(c)`
+- `parseTwilic(c, options?)`
 - `twilicResponse(c, value, init?)`
 - `twilicParser(options?)`
 - `createTwilicHono(codec?)`
+
+## Request body limits
+
+`twilicParser()` and `parseTwilic()` limit the body to **1,048,576 bytes (1 MiB)** by default. The same options apply to factory-created `parser()` and `parse()` helpers. Set `limit` to a non-negative safe integer in bytes:
+
+```ts
+twilicParser({ limit: 256 * 1024 });
+await parseTwilic(c, { limit: 256 * 1024 });
+```
+
+The reader counts received chunks, including requests without `Content-Length`, and stops before decoding an oversized body. Middleware responds with HTTP 413. A direct `parse()` call rejects with an error carrying `status: 413`. `limit: 0` permits an empty body only. Previously accepted larger requests now require an explicit higher limit; decoded collection limits still apply separately.
+
+Mount the parser before other middleware consumes the request stream. Also configure request timeouts and authentication for the route.
 
 ## Runnable example
 
