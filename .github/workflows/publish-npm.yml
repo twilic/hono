@@ -24,12 +24,10 @@ jobs:
         with:
           ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref }}
 
-      - name: Setup pnpm
-        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 11.25.0
-          cache: true
-          install: false
+          bun-version: 1.4.2
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +36,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun ci
 
       - name: Verify tag and package version
         run: |
@@ -46,7 +44,7 @@ jobs:
           node ./scripts/verify-tag-version.mjs "$RELEASE_TAG"
 
       - name: Run tests
-        run: pnpm test
+        run: bun run test
 
       # Trusted publishing (OIDC): requires npm CLI >= 11.5.1 (see npm trusted-publishers docs).
       # Configure the package on npmjs.com: Settings → Trusted Publisher → GitHub Actions

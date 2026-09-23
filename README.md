@@ -5,7 +5,7 @@ Hono helpers and middleware for Twilic binary request and response bodies.
 ## Install
 
 ```bash
-pnpm add @twilic/hono hono @twilic/core
+bun add @twilic/hono hono @twilic/core
 ```
 
 ## Usage
@@ -46,8 +46,8 @@ Mount the parser before other middleware consumes the request stream. Also confi
 ## Runnable example
 
 ```bash
-pnpm example:http-roundtrip:hono     # Hono server (in twilic/examples)
-pnpm example:http-roundtrip:client
+bun run example:http-roundtrip:hono     # Hono server (in twilic/examples)
+bun run example:http-roundtrip:client
 ```
 
 See [`http-roundtrip/`](https://github.com/twilic/examples/tree/main/http-roundtrip).
@@ -63,8 +63,8 @@ The package ships build artifacts from `dist/`.
 Local dry run:
 
 ```bash
-pnpm build
-pnpm pack
+bun run build
+bun pm pack
 ```
 
 GitHub Actions publish uses [npm trusted publishing (OIDC)](https://docs.npmjs.com/trusted-publishers/)—no long-lived `NPM_TOKEN` secret.
